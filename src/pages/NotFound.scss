@@ -1,0 +1,19 @@
+.box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.errorTitle {
+  color: lightblue;
+  font-weight: bold;
+  font-size: 240px;
+}
+.errorDescription {
+  color: lightblue;
+  font-weight: 400;
+  font-size: 30px;
+}
