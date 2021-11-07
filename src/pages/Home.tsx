@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./HomeStyle.scss";
 import { Line } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 
-let status: any;
-
 const Home = () => {
+  const [veryGood, setVeryGood] = useState("flex");
+  const [good, setGood] = useState("none");
+  const [normal, setNormal] = useState("none");
+  const [bad, setBad] = useState("none");
+  const [veryBad, setVeryBad] = useState("none");
+  const [unInserted, setUnInserted] = useState("none");
+
+  let status: any = 1;
   const logoPath = {
     bgWhite: "images/logo_png_bgWhite.png",
     bgBlue: "images/logo_png_bgBlue.png",
@@ -119,7 +125,12 @@ const Home = () => {
         </ul>
       </div>
 
-      <div className="status-veryGood">
+      <div
+        className="status-veryGood"
+        style={{
+          display: `${veryGood}`,
+        }}
+      >
         <div className="status_info">
           <div className="title">
             <div className="name">주현명</div>
@@ -142,7 +153,7 @@ const Home = () => {
       <div
         className="status-veryBad"
         style={{
-          display: "none",
+          display: `${veryBad}`,
         }}
       >
         <div className="status_info">
@@ -151,6 +162,106 @@ const Home = () => {
             (님)의 수면패턴 정보
           </div>
           <h2>매우 나쁨</h2>
+          <h3>
+            평균 수면 시간 :<div className="time">3시간 미만</div>
+          </h3>
+        </div>
+        <div className="status_values">
+          <Line
+            data={data}
+            options={options}
+            style={{ position: "relative", height: "250px" }}
+          />
+        </div>
+      </div>
+
+      <div
+        className="status-bad"
+        style={{
+          display: `${bad}`,
+        }}
+      >
+        <div className="status_info">
+          <div className="title">
+            <div className="name">주현명</div>
+            (님)의 수면패턴 정보
+          </div>
+          <h2>나쁨</h2>
+          <h3>
+            평균 수면 시간 :<div className="time">3시간 미만</div>
+          </h3>
+        </div>
+        <div className="status_values">
+          <Line
+            data={data}
+            options={options}
+            style={{ position: "relative", height: "250px" }}
+          />
+        </div>
+      </div>
+
+      <div
+        className="status-good"
+        style={{
+          display: `${good}`,
+        }}
+      >
+        <div className="status_info">
+          <div className="title">
+            <div className="name">주현명</div>
+            (님)의 수면패턴 정보
+          </div>
+          <h2>좋음</h2>
+          <h3>
+            평균 수면 시간 :<div className="time">3시간 미만</div>
+          </h3>
+        </div>
+        <div className="status_values">
+          <Line
+            data={data}
+            options={options}
+            style={{ position: "relative", height: "250px" }}
+          />
+        </div>
+      </div>
+
+      <div
+        className="status-normal"
+        style={{
+          display: `${normal}`,
+        }}
+      >
+        <div className="status_info">
+          <div className="title">
+            <div className="name">주현명</div>
+            (님)의 수면패턴 정보
+          </div>
+          <h2>보통</h2>
+          <h3>
+            평균 수면 시간 :<div className="time">3시간 미만</div>
+          </h3>
+        </div>
+        <div className="status_values">
+          <Line
+            data={data}
+            options={options}
+            style={{ position: "relative", height: "250px" }}
+          />
+        </div>
+      </div>
+
+      <div
+        className="status-unInserted"
+        style={{
+          display: `${unInserted}`,
+        }}
+      >
+        <div className="status_info">
+          <div className="title">
+            <div className="name">주현명</div>
+            (님)의 수면패턴 정보
+          </div>
+          <h2>입력된 정보 없음</h2>
           <h3>
             평균 수면 시간 :<div className="time">3시간 미만</div>
           </h3>
