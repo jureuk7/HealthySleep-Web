@@ -12,6 +12,7 @@ const Home = () => {
   const [unInserted, setUnInserted] = useState("none");
 
   let status: any = 1;
+
   const logoPath = {
     bgWhite: "images/logo_png_bgWhite.png",
     bgBlue: "images/logo_png_bgBlue.png",
@@ -42,29 +43,28 @@ const Home = () => {
     data.datasets[0].data.reduce((a: any, b: any) => a + b, 0) /
     data.datasets[0].datalength;
 
-  if (avg)
-    switch (status) {
-      case 1:
-        data.datasets[0].borderColor = "#ffa654";
-        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
-        break;
-      case 2:
-        data.datasets[0].borderColor = "#ffa654";
-        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
-        break;
-      case 3:
-        data.datasets[0].borderColor = "#ffa654";
-        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
-        break;
-      case 4:
-        data.datasets[0].borderColor = "#ffa654";
-        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
-        break;
-      case 5:
-        data.datasets[0].borderColor = "#ffa654";
-        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
-        break;
-    }
+  switch (status) {
+    case 1:
+      data.datasets[0].borderColor = "#ffa654";
+      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+      break;
+    case 2:
+      data.datasets[0].borderColor = "#ffa654";
+      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+      break;
+    case 3:
+      data.datasets[0].borderColor = "#ffa654";
+      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+      break;
+    case 4:
+      data.datasets[0].borderColor = "#ffa654";
+      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+      break;
+    case 5:
+      data.datasets[0].borderColor = "#ffa654";
+      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+      break;
+  }
 
   const options = {
     layout: {
