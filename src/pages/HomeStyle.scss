@@ -17,6 +17,16 @@
     list-style: none;
     justify-content: space-around;
     align-items: center;
+    li {
+      a {
+        text-decoration: none;
+        color: #202020;
+        &:hover {
+          text-decoration: underline;
+          font-weight: normal;
+        }
+      }
+    }
   }
   .logo {
     width: 80px;
@@ -24,7 +34,7 @@
   }
 }
 
-.status {
+.status-veryGood {
   position: absolute;
   width: 100%;
   height: 450px;
@@ -63,6 +73,53 @@
     font-size: 80px;
     font-weight: bolder;
     color: #2564ab;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+}
+
+.status-veryBad {
+  position: absolute;
+  width: 100%;
+  height: 450px;
+  padding-top: 130px;
+  background: rgb(255, 205, 27);
+  background: linear-gradient(90deg, #eee3bd 0%, #eec1bd 100%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-evenly;
+  color: #2f2f2f;
+  font-family: "SB 어그로체";
+  font-weight: bold;
+  .status_info {
+    flex-direction: column;
+    justify-content: flex-start;
+    .name {
+      font-weight: normal;
+      font-size: 35px;
+      color: black;
+      display: inline-block;
+    }
+    .time {
+      font-weight: normal;
+      font-size: 25px;
+      color: black;
+      display: inline-block;
+    }
+  }
+  .title {
+    font-size: 30px;
+    font-weight: lighter;
+  }
+  h2 {
+    font-size: 80px;
+    font-weight: bolder;
+    color: #ffa654;
     margin-top: 20px;
     margin-bottom: 20px;
   }

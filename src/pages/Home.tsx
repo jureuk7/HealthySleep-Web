@@ -1,6 +1,9 @@
 import React from "react";
 import "./HomeStyle.scss";
 import { Line } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+
+let status: any;
 
 const Home = () => {
   const logoPath = {
@@ -21,15 +24,41 @@ const Home = () => {
     ],
     datasets: [
       {
-        label: "이번 주 수면시간 그래프",
+        label: "이 날의 수면시간",
         data: [10, 8, 9, 7, 11, 8, 7],
         fill: true,
-        borderColor: "#2564ab",
-        backgroundColor: "rgba(37, 100, 171,0.3)",
         tension: 0.1,
       },
     ],
-  };
+  } as unknown as any;
+
+  let avg =
+    data.datasets[0].data.reduce((a: any, b: any) => a + b, 0) /
+    data.datasets[0].datalength;
+
+  if (avg)
+    switch (status) {
+      case 1:
+        data.datasets[0].borderColor = "#ffa654";
+        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+        break;
+      case 2:
+        data.datasets[0].borderColor = "#ffa654";
+        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+        break;
+      case 3:
+        data.datasets[0].borderColor = "#ffa654";
+        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+        break;
+      case 4:
+        data.datasets[0].borderColor = "#ffa654";
+        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+        break;
+      case 5:
+        data.datasets[0].borderColor = "#ffa654";
+        data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+        break;
+    }
 
   const options = {
     layout: {
@@ -81,17 +110,47 @@ const Home = () => {
             />
           </li>
           <li>기록하기</li>
-          <li>주간 별 그래프</li>
-          <li>내 정보</li>
+          <li>
+            <Link to="/weekGraph">주간 별 그래프</Link>
+          </li>
+          <li>
+            <Link to="/myInfo">내 정보</Link>
+          </li>
         </ul>
       </div>
-      <div className="status">
+
+      <div className="status-veryGood">
         <div className="status_info">
           <div className="title">
             <div className="name">주현명</div>
             (님)의 수면패턴 정보
           </div>
           <h2>매우 좋음</h2>
+          <h3>
+            평균 수면 시간 :<div className="time">10시간</div>
+          </h3>
+        </div>
+        <div className="status_values">
+          <Line
+            data={data}
+            options={options}
+            style={{ position: "relative", height: "250px" }}
+          />
+        </div>
+      </div>
+
+      <div
+        className="status-veryBad"
+        style={{
+          display: "none",
+        }}
+      >
+        <div className="status_info">
+          <div className="title">
+            <div className="name">주현명</div>
+            (님)의 수면패턴 정보
+          </div>
+          <h2>매우 나쁨</h2>
           <h3>
             평균 수면 시간 :<div className="time">3시간 미만</div>
           </h3>
