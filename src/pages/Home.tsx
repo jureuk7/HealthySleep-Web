@@ -1,24 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./HomeStyle.scss";
 import { Line } from "react-chartjs-2";
-import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const Home = () => {
-  const [veryGood, setVeryGood] = useState("flex");
-  const [good, setGood] = useState("none");
-  const [normal, setNormal] = useState("none");
-  const [bad, setBad] = useState("none");
-  const [veryBad, setVeryBad] = useState("none");
-  const [unInserted, setUnInserted] = useState("none");
+  let status: any = 5;
 
-  let status: any = 1;
+  let avgTime: any;
 
-  const logoPath = {
-    bgWhite: "images/logo_png_bgWhite.png",
-    bgBlue: "images/logo_png_bgBlue.png",
-    noBg: "images/logo_png_noBg.png",
-    textBlue: "images/logo_png_textBlue.png",
-  };
   const data = {
     labels: [
       "월요일",
@@ -39,9 +28,11 @@ const Home = () => {
     ],
   } as unknown as any;
 
-  let avg =
-    data.datasets[0].data.reduce((a: any, b: any) => a + b, 0) /
-    data.datasets[0].datalength;
+  let avg: number =
+    data.datasets[0].data.reduce((a: number, b: number) => a + b) /
+    data.datasets[0].data.length;
+
+  avgTime = Math.floor(avg) + "시간 미만";
 
   switch (status) {
     case 1:
@@ -53,16 +44,16 @@ const Home = () => {
       data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
       break;
     case 3:
-      data.datasets[0].borderColor = "#ffa654";
-      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+      data.datasets[0].borderColor = "#139e43";
+      data.datasets[0].backgroundColor = "rgba(19, 158, 67,0.3)";
       break;
     case 4:
       data.datasets[0].borderColor = "#ffa654";
       data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
       break;
     case 5:
-      data.datasets[0].borderColor = "#ffa654";
-      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
+      data.datasets[0].borderColor = "#2564ab";
+      data.datasets[0].backgroundColor = "rgba(37, 100, 171,0.3)";
       break;
   }
 
@@ -106,31 +97,9 @@ const Home = () => {
 
   return (
     <div>
-      <div className="header">
-        <ul>
-          <li>
-            <img
-              className="logo"
-              src={logoPath.textBlue}
-              alt="건강한수면 로고_하얀배경"
-            />
-          </li>
-          <li>기록하기</li>
-          <li>
-            <Link to="/weekGraph">주간 별 그래프</Link>
-          </li>
-          <li>
-            <Link to="/myInfo">내 정보</Link>
-          </li>
-        </ul>
-      </div>
+      <Header />
 
-      <div
-        className="status-veryGood"
-        style={{
-          display: `${veryGood}`,
-        }}
-      >
+      <div className="status-great">
         <div className="status_info">
           <div className="title">
             <div className="name">주현명</div>
@@ -138,132 +107,7 @@ const Home = () => {
           </div>
           <h2>매우 좋음</h2>
           <h3>
-            평균 수면 시간 :<div className="time">10시간</div>
-          </h3>
-        </div>
-        <div className="status_values">
-          <Line
-            data={data}
-            options={options}
-            style={{ position: "relative", height: "250px" }}
-          />
-        </div>
-      </div>
-
-      <div
-        className="status-veryBad"
-        style={{
-          display: `${veryBad}`,
-        }}
-      >
-        <div className="status_info">
-          <div className="title">
-            <div className="name">주현명</div>
-            (님)의 수면패턴 정보
-          </div>
-          <h2>매우 나쁨</h2>
-          <h3>
-            평균 수면 시간 :<div className="time">3시간 미만</div>
-          </h3>
-        </div>
-        <div className="status_values">
-          <Line
-            data={data}
-            options={options}
-            style={{ position: "relative", height: "250px" }}
-          />
-        </div>
-      </div>
-
-      <div
-        className="status-bad"
-        style={{
-          display: `${bad}`,
-        }}
-      >
-        <div className="status_info">
-          <div className="title">
-            <div className="name">주현명</div>
-            (님)의 수면패턴 정보
-          </div>
-          <h2>나쁨</h2>
-          <h3>
-            평균 수면 시간 :<div className="time">3시간 미만</div>
-          </h3>
-        </div>
-        <div className="status_values">
-          <Line
-            data={data}
-            options={options}
-            style={{ position: "relative", height: "250px" }}
-          />
-        </div>
-      </div>
-
-      <div
-        className="status-good"
-        style={{
-          display: `${good}`,
-        }}
-      >
-        <div className="status_info">
-          <div className="title">
-            <div className="name">주현명</div>
-            (님)의 수면패턴 정보
-          </div>
-          <h2>좋음</h2>
-          <h3>
-            평균 수면 시간 :<div className="time">3시간 미만</div>
-          </h3>
-        </div>
-        <div className="status_values">
-          <Line
-            data={data}
-            options={options}
-            style={{ position: "relative", height: "250px" }}
-          />
-        </div>
-      </div>
-
-      <div
-        className="status-normal"
-        style={{
-          display: `${normal}`,
-        }}
-      >
-        <div className="status_info">
-          <div className="title">
-            <div className="name">주현명</div>
-            (님)의 수면패턴 정보
-          </div>
-          <h2>보통</h2>
-          <h3>
-            평균 수면 시간 :<div className="time">3시간 미만</div>
-          </h3>
-        </div>
-        <div className="status_values">
-          <Line
-            data={data}
-            options={options}
-            style={{ position: "relative", height: "250px" }}
-          />
-        </div>
-      </div>
-
-      <div
-        className="status-unInserted"
-        style={{
-          display: `${unInserted}`,
-        }}
-      >
-        <div className="status_info">
-          <div className="title">
-            <div className="name">주현명</div>
-            (님)의 수면패턴 정보
-          </div>
-          <h2>입력된 정보 없음</h2>
-          <h3>
-            평균 수면 시간 :<div className="time">3시간 미만</div>
+            평균 수면 시간 :<div className="time">{avgTime}</div>
           </h3>
         </div>
         <div className="status_values">
