@@ -5,29 +5,28 @@
   src: url("./SB-어그로OTF-M.otf") format("opentype"),
     url("./SB-어그로OTF-M.woff") format("woff"),
     url("./SB-어그로OTF-M.eot?iefix") format("embedded-opentype");
-
-  font-weight: 400;
-  font-style: normal;
 }
 @font-face {
-  font-family: "SB 어그로체";
+  font-family: "SB 어그로체 L";
   font-display: fallback;
 
   src: url("./SB-어그로OTF-L.otf") format("opentype"),
     url("./SB-어그로OTF-L.woff") format("woff"),
     url("./SB-어그로OTF-L.eot?iefix") format("embedded-opentype");
-
-  font-weight: 300;
-  font-style: lighter;
 }
 @font-face {
-  font-family: "SB 어그로체";
+  font-family: "SB 어그로체 B";
   font-display: fallback;
 
   src: url("./SB-어그로OTF-B.otf") format("opentype"),
     url("./SB-어그로OTF-B.woff") format("woff"),
     url("./SB-어그로OTF-B.eot?iefix") format("embedded-opentype");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-display: fallback;
 
-  font-weight: 300;
-  font-style: bold;
+  src: url("./Pretendard-Regular.ttf") format("truetype"),
+  url("./Pretendard-Regular.woff") format("woff"),
+  url("./Pretendard-Regular.eot?iefix") format("embedded-opentype");
 }

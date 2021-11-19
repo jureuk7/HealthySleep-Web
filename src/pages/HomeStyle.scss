@@ -11,6 +11,7 @@
   left: 0;
   z-index: 5;
   background: white;
+  font-family: "Pretendard", sans-serif;
 
   ul {
     display: flex;
@@ -26,6 +27,21 @@
           font-weight: normal;
         }
       }
+      .userinfo {
+        position: relative;
+        font-weight: bold;
+        background: #202020;
+        border: 6px #202020 solid;
+        border-radius: 5px;
+        color: white;
+        font-size: 17px;
+        &:hover {
+          cursor: pointer;
+          background: #2d2d2d;
+          border: 6px #2d2d2d solid;
+          color: #f1f1f1;
+        }
+      }
     }
   }
   .logo {
@@ -35,7 +51,7 @@
 }
 
 .status-great {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 450px;
   padding-top: 130px;
@@ -44,11 +60,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
   justify-content: space-evenly;
   color: #2f2f2f;
-  font-family: "SB 어그로체";
-  font-weight: bold;
+  font-family: "SB 어그로체", sans-serif;
   .status_info {
     flex-direction: column;
     justify-content: flex-start;
@@ -229,3 +243,59 @@
     font-size: 20px;
   }
 }
+
+.description{
+  position: relative;
+  width: 100%;
+  height: 650px;
+  .title{
+    color: rgba(88, 44, 255, 1);
+    font-family: "SB 어그로체 L", sans-serif;
+    font-weight: lighter;
+    padding-top: 20px;
+    text-align: center;
+  }
+.descriptionContainer {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+
+  div {
+    h1{
+      margin-left: 20px;
+      font-family: "SB 어그로체", sans-serif;
+    }
+    h3{
+      margin-left: 20px;
+      font-family: "SB 어그로체", sans-serif;
+    }
+    p {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .descriptionImage{
+      position: relative;
+      width: 240px;
+      height: 168px;
+      border-radius: 5px;
+    }
+    font-family: "SB 어그로체 L", sans-serif;
+    width: 240px;
+
+    height: 550px;
+    background: rgb(88, 44, 255);
+    background: linear-gradient(180deg, rgba(88, 44, 255, 1) 0%, rgba(91, 143, 255, 1) 100%);
+    border-radius: 5px;
+    display: inline-block;
+    -webkit-box-shadow: 0px 0px 12px 0px #CCCAFF;
+    box-shadow: 0px 0px 12px 0px #CCCAFF;
+  }
+}
+}
+
+

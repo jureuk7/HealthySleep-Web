@@ -8,9 +8,15 @@ const logoPath = {
   textBlue: "images/logo_png_textBlue.png",
 };
 
-const Header = () => {
+interface headerProps {
+  user: {
+    _id:string;
+    username:string;
+  } | null
+}
+
+const Header = ({user}:headerProps) => {
   return (
-    <div>
       <div className="header">
         <ul>
           <li>
@@ -27,10 +33,16 @@ const Header = () => {
             <Link to="/weekGraph">주간 별 그래프</Link>
           </li>
           <li>
-            <Link to="/myInfo">내 정보</Link>
+            {user ? (
+                <button className="userinfo">
+                {user.username}님
+                </button>
+            ) : (
+                <Link to="/login">로그인</Link>
+            )
+            }
           </li>
         </ul>
-      </div>
     </div>
   );
 };

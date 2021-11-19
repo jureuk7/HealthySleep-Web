@@ -1,0 +1,73 @@
+.loginWrapper{
+  font-family: "Pretendard", sans-serif;
+  width:100%;
+  height:100%;
+  background:#e2e2e2;
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.loginForm {
+    padding: 32px;
+  width:300px;
+  height:auto;
+  position:absolute;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    input {
+      background: none;
+      border: none;
+      border-bottom: 1px solid lightgray;
+      width: 100%;
+      padding-top: 5px;
+      padding-bottom: 15px;
+      outline: none;
+    }
+    button {
+      margin-top: 25px;
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-radius: 5px;
+      background: rgb(11,38,255);
+      background: linear-gradient(90deg, rgba(11,38,255,1) 0%, rgba(161,91,255,1) 100%);
+      color: white;
+      &:hover {
+        cursor: pointer;
+        background: rgb(0,28,255);
+        background: linear-gradient(90deg, rgba(0,28,255,1) 0%, rgba(132,40,255,1) 100%);
+      }
+    }
+    a {
+      margin-top: 15px;
+      margin-right: 8px;
+      font-size: 14px;
+      text-align: right;
+      color: #666666;
+    }
+  .errorMessage {
+    position: relative;
+    width: auto;
+    text-align: center;
+    color: red;
+    font-size: 13px;
+    margin-top: 16px;
+  }
+  .passwordWrapper {
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    input {
+      position: relative;
+      width: auto;
+    }
+    button {
+      display: inline-block;
+      position: relative;
+    }
+  }
+  }
