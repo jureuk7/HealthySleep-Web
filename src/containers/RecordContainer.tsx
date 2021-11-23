@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,16 +14,20 @@ import {
 } from "../modules/sleepData";
 import { RootState } from "../modules";
 import RecordInner from "../components/record/RecordInner";
+import ModalLogout from "../components/common/ModalLogout";
 
 const RecordContainer = () => {
+  const [error, setError] = useState<string | null>(null);
+  const [modalView, setModalView] = useState(false);
   const dispatch = useDispatch();
   const current = new Date();
   // @ts-ignore
-  const { startSleep, finishSleep, isExists } = useSelector(
+  const { startSleep, finishSleep, isExists, sleepDataError } = useSelector(
     ({ sleepData }: RootState) => ({
       startSleep: sleepData.startSleep,
       finishSleep: sleepData.finishSleep,
       isExists: sleepData.isExists,
+      sleepDataError: sleepData.sleepDataError,
     })
   );
 
@@ -119,6 +123,13 @@ const RecordContainer = () => {
     // eslint-disable-next-line
   }, [isExists]);
 
+  useEffect(() => {
+    if (sleepDataError) {
+      setError("제출에 실패했습니다.");
+      return;
+    }
+  }, [sleepDataError]);
+
   const setNowFinishSleep = (e: any) => {
     dispatch(
       setField({
@@ -147,7 +158,7 @@ const RecordContainer = () => {
 
   return (
     <div>
-      <Header user={user} />
+      <Header user={user} modalView={modalView} setModalView={setModalView} />
       <div className="record-wrapper">
         <RecordInner
           user={user}
@@ -159,8 +170,12 @@ const RecordContainer = () => {
           startSleep={startSleep}
           finishSleep={finishSleep}
           navigate={navigate}
+          error={error}
         />
       </div>
+      {modalView ? (
+        <ModalLogout modalView={modalView} setModalView={setModalView} />
+      ) : null}
     </div>
   );
 };

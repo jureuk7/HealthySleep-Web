@@ -52,6 +52,10 @@
       border: none;
       font-size: 13px;
       margin-left: 10px;
+      &:hover {
+        cursor: pointer;
+        background-color: #4a4f55;
+      }
     }
   }
 }

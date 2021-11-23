@@ -17,8 +17,6 @@
   align-content: normal;
   flex-wrap: nowrap;
   flex-direction: column;
-  div {
-  }
   h1 {
     font-family: "Pretendard-Black", sans-serif;
     font-size: 4rem;
@@ -101,6 +99,13 @@
         background: rgb(0,28,255);
         background: linear-gradient(90deg, rgba(0,28,255,1) 0%, rgba(132,40,255,1) 100%);
       }
+    }
+    .error {
+      margin-top: 20px;
+      width: auto;
+      color: red;
+      margin-left: 1rem;
+      font-size: 15px;
     }
   }
 }

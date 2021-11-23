@@ -10,6 +10,7 @@ const RecordInner = ({
   onFinishSleepChange,
   setNowFinishSleep,
   navigate,
+  error,
 }: any) => {
   return (
     <>
@@ -119,6 +120,7 @@ const RecordInner = ({
                 분
                 <button onClick={setNowFinishSleep}>현재 시간 입력하기</button>
               </div>
+              <div className="error">{error}</div>
               <button type="submit" className="save">
                 기록 저장하기
               </button>

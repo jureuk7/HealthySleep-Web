@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../modules";
 import SleepDescription from "../components/home/SleepDescription";
 import StatusBox from "../components/home/StatusBox";
 import ModalLogout from "../components/common/ModalLogout";
+import { initializeForm, readWeek } from "../modules/sleepData";
 
 interface userType {
   _id: string | null;
@@ -12,31 +13,43 @@ interface userType {
 }
 
 const HomeContainer = () => {
+  const current = new Date();
+  const dispatch = useDispatch();
+
   const [modalView, setModalView] = useState(false);
 
   let user: userType | null;
   ({ user } = useSelector(({ user }: RootState) => ({ user: user.user })));
+  const { weekend } = useSelector(({ sleepData }: RootState) => ({
+    weekend: sleepData.weekend,
+  }));
+
+  const sleepDate =
+    current.getHours() < 18
+      ? `${current.getFullYear()}-${current.getMonth() + 1}-${
+          current.getDate() - 1
+        }`
+      : `${current.getFullYear()}-${
+          current.getMonth() + 1
+        }-${current.getDate()}`;
+
   let status: any = 5;
 
-  let avgTime: any;
+  const [avgTime, setAvgTime] = useState(0);
+  const [arrayData, setArrayData] = useState([] as string[]);
+  const [statusVisible, setStatusVisible] = useState();
 
-  const data = {
+  let data = {
     labels: ["일", "월", "화", "수", "목", "금", "토"],
     datasets: [
       {
         label: "이 날의 수면시간",
-        data: [10, 8, 9, 7, 11, 8, 7],
         fill: true,
-        tension: 0.1,
+        data: arrayData,
+        tension: 0.5,
       },
     ],
   } as unknown as any;
-
-  let avg: number =
-    data.datasets[0].data.reduce((a: number, b: number) => a + b) /
-    data.datasets[0].data.length;
-
-  avgTime = Math.floor(avg) + "시간 미만";
 
   switch (status) {
     case 3:
@@ -85,16 +98,65 @@ const HomeContainer = () => {
         ticks: {
           color: "#202020",
         },
-        min: 0,
-        max: 14,
       },
     },
   };
 
+  useEffect(() => {
+    if (user) {
+      dispatch(initializeForm("weekend"));
+      dispatch(
+        readWeek({
+          username: user.username,
+          sleepDate,
+        })
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    let result;
+    let time = 0;
+    if (weekend) {
+      if (weekend.avgData.length !== 0) {
+        for (let i = 0; i < weekend.avgData.length; i++) {
+          time += weekend.avgData[i];
+        }
+        if (time !== 0) {
+          result = time / weekend.avgData.length;
+          setArrayData([
+            ...arrayData,
+            weekend.sunday.exists ? weekend.sunday.elapsed.hour : "0",
+            weekend.monday.exists ? weekend.monday.elapsed.hour : "0",
+            weekend.tuesday.exists ? weekend.tuesday.elapsed.hour : "0",
+            weekend.wednesday.exists ? weekend.wednesday.elapsed.hour : "0",
+            weekend.thursday.exists ? weekend.thursday.elapsed.hour : "0",
+            weekend.friday.exists ? weekend.friday.elapsed.hour : "0",
+            weekend.saturday.exists ? weekend.saturday.elapsed.hour : "0",
+          ]);
+        } else {
+          result = 0;
+        }
+      } else {
+        result = 0;
+      }
+    } else {
+      result = 0;
+    }
+    setAvgTime(result);
+  }, [weekend]);
+
   return (
     <>
       <Header user={user} modalView={modalView} setModalView={setModalView} />
-      <StatusBox options={options} avgTime={avgTime} data={data} />
+
+      <StatusBox
+        options={options}
+        avgTime={avgTime}
+        data={data}
+        user={user}
+        visible={true}
+      />
       <SleepDescription />
       {modalView ? (
         <ModalLogout modalView={modalView} setModalView={setModalView} />
