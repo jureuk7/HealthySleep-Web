@@ -19,20 +19,13 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
     statusTitle = `입력된 데이터가 부족합니다`;
   } else {
     if (avgTime / 60 <= 3) {
-      // startGradient = `#ffcdda 0%`;
-      // endGradient = `#ffc1d0 100%`;
-      // textColor = `#202020`;
-      // statusColor = `#ff5487`;
-      // statusTitle = `매우 나쁨`;
-      // borderColor = "#ff5487";
-      // backgroundColor = "rgba(255,135,84,0.3)";
-      startGradient = `#d6e2ff 0%`;
-      endGradient = `#b8cdff 100%`;
+      startGradient = `#ffcdda 0%`;
+      endGradient = `#ffc1d0 100%`;
       textColor = `#202020`;
-      statusColor = `#2163ff`;
-      statusTitle = `매우 좋음`;
-      borderColor = "#2163ff";
-      backgroundColor = "rgba(33, 99, 255,0.3)";
+      statusColor = `#ff5487`;
+      statusTitle = `매우 나쁨`;
+      borderColor = "#ff5487";
+      backgroundColor = "rgba(255,135,84,0.3)";
     }
     if (avgTime / 60 > 3 && avgTime / 60 <= 5) {
       startGradient = `#eee3bd 0%`;
