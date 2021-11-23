@@ -33,42 +33,12 @@ const HomeContainer = () => {
           current.getMonth() + 1
         }-${current.getDate()}`;
 
-  let status: any = 5;
-
   const [avgTime, setAvgTime] = useState(0);
   const [arrayData, setArrayData] = useState([] as string[]);
-  const [statusVisible, setStatusVisible] = useState();
-
-  let data = {
-    labels: ["일", "월", "화", "수", "목", "금", "토"],
-    datasets: [
-      {
-        label: "이 날의 수면시간",
-        fill: true,
-        data: arrayData,
-        tension: 0.5,
-      },
-    ],
-  } as unknown as any;
-
-  switch (status) {
-    case 3:
-      data.datasets[0].borderColor = "#139e43";
-      data.datasets[0].backgroundColor = "rgba(19, 158, 67,0.3)";
-      break;
-    case 4:
-      data.datasets[0].borderColor = "#ffa654";
-      data.datasets[0].backgroundColor = "rgba(255,166,84,0.3)";
-      break;
-    case 5:
-      data.datasets[0].borderColor = "#2564ab";
-      data.datasets[0].backgroundColor = "rgba(37, 100, 171,0.3)";
-      break;
-  }
 
   const options = {
     layout: {
-      padding: -5,
+      padding: -2,
     },
     maintainAspectRatio: false,
     plugins: {
@@ -151,13 +121,11 @@ const HomeContainer = () => {
   return (
     <>
       <Header user={user} modalView={modalView} setModalView={setModalView} />
-
       <StatusBox
         options={options}
         avgTime={avgTime}
-        data={data}
+        data={arrayData}
         user={user}
-        visible={true}
       />
       <SleepDescription />
       {modalView ? (
