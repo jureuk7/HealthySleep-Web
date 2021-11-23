@@ -30,3 +30,19 @@
   url("./Pretendard-Regular.woff") format("woff"),
   url("./Pretendard-Regular.eot?iefix") format("embedded-opentype");
 }
+@font-face {
+  font-family: "Pretendard-Bold";
+  font-display: fallback;
+
+  src: url("./Pretendard-Bold.ttf") format("truetype"),
+  url("./Pretendard-Bold.woff") format("woff"),
+  url("./Pretendard-Bold.eot?iefix") format("embedded-opentype");
+}
+@font-face {
+  font-family: "Pretendard-Black";
+  font-display: fallback;
+
+  src: url("./Pretendard-Black.ttf") format("truetype"),
+  url("./Pretendard-Black.woff") format("woff"),
+  url("./Pretendard-Black.eot?iefix") format("embedded-opentype");
+}

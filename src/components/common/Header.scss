@@ -1,0 +1,48 @@
+.header {
+  position: fixed;
+  width: 100%;
+  height: auto;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  font-family: "Pretendard", sans-serif;
+
+  ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    li {
+      a {
+        text-decoration: none;
+        color: #202020;
+        &:hover {
+          text-decoration: underline;
+          font-weight: normal;
+        }
+      }
+      .userinfo {
+        position: relative;
+        font-weight: bold;
+        background: #202020;
+        border: 6px #202020 solid;
+        border-radius: 5px;
+        color: white;
+        font-size: 17px;
+        &:hover {
+          cursor: pointer;
+          background: #2d2d2d;
+          border: 6px #2d2d2d solid;
+          color: #f1f1f1;
+        }
+      }
+    }
+  }
+  .logo {
+    width: 80px;
+    height: auto;
+  }
+}
