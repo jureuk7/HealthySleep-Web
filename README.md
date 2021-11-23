@@ -15,7 +15,7 @@ HealthySleep(건강한수면) 서비스는 본인의 수면/기상 시간을 기
 
 ## 주의사항
 ### ※ 해당 프로젝트는 <a href="https://github.com/wugusaud77/HealthySleep-Backend">HealthySleep-Backend</a>가 실행되고 있지 않으면 작동하지 않습니다.
-  해당 프로젝트는 선린인터넷고등학교 입학용 포트폴리오로 제작된 프로젝트입니다. 지원이 종료될 수 있습니다.
+  해당 프로젝트는 **선린인터넷고등학교 입학용 포트폴리오로** 제작된 프로젝트입니다. 지원이 종료될 수 있습니다.
 
 ## LICENSE
 
