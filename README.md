@@ -9,7 +9,7 @@ HealthySleep(건강한수면) 서비스는 본인의 수면/기상 시간을 기
 ### Clone
 `git clone https://github.com/wugusaud77/HealthySleep-Web.git`
 ### Setup
-`npm install` 또는 `yarn add`
+`npm install` 또는 `yarn`
 ### Run
 `npm run start` 또는 `yarn start`
 
