@@ -29,6 +29,9 @@ const [SET_FINISH_SLEEP, SET_FINISH_SLEEP_SUCCESS, SET_FINISH_SLEEP_FAILURE] =
 const [READ_WEEK, READ_WEEK_SUCCESS, READ_WEAK_FAILURE] =
   createRequestActionTypes("sleepData/READ_WEEK");
 
+const [READ_LAST_WEEK, READ_LAST_WEEK_SUCCESS, READ_LAST_WEAK_FAILURE] =
+  createRequestActionTypes("sleepData/READ_LAST_WEEK");
+
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }: any) => ({
@@ -102,6 +105,14 @@ export const readWeek = createAction(
   })
 );
 
+export const readLastWeek = createAction(
+  READ_LAST_WEEK,
+  ({ username, sleepDate }: any) => ({
+    username,
+    sleepDate,
+  })
+);
+
 const dataInitSaga = createRequestSaga(DATA_INIT, sleepDataAPI.init);
 const existsSaga = createRequestSaga(EXISTS, sleepDataAPI.isExists);
 const setStartSleepSaga = createRequestSaga(
@@ -115,6 +126,11 @@ const setFinishSleepSaga = createRequestSaga(
 const readWeekSaga = createRequestSaga(READ_WEEK, sleepDataAPI.readWeek);
 const mergeDataSaga = createRequestSaga(MERGE_DATA, sleepDataAPI.read);
 
+const readLastWeekSaga = createRequestSaga(
+  READ_LAST_WEEK,
+  sleepDataAPI.readWeek
+);
+
 export function* sleepDataSaga() {
   yield takeLatest(SET_START_SLEEP, setStartSleepSaga);
   yield takeLatest(SET_FINISH_SLEEP, setFinishSleepSaga);
@@ -122,6 +138,7 @@ export function* sleepDataSaga() {
   yield takeLatest(READ_WEEK, readWeekSaga);
   yield takeLatest(DATA_INIT, dataInitSaga);
   yield takeLatest(MERGE_DATA, mergeDataSaga);
+  yield takeLatest(READ_LAST_WEEK, readLastWeekSaga);
 }
 
 const initialState = {
@@ -141,6 +158,7 @@ const initialState = {
   },
   isExists: null,
   weekend: null,
+  lastWeekend: null,
   ds: null,
   initSuccess: null,
 } as unknown as any;
@@ -239,6 +257,14 @@ const sleepData = createReducer(initialState, {
     weekend: result,
   }),
   [READ_WEAK_FAILURE]: (state: any, { payload: error }: any) => ({
+    ...state,
+    sleepDataError: error,
+  }),
+  [READ_LAST_WEEK_SUCCESS]: (state: any, { payload: result }: any) => ({
+    ...state,
+    lastWeekend: result,
+  }),
+  [READ_LAST_WEAK_FAILURE]: (state: any, { payload: error }: any) => ({
     ...state,
     sleepDataError: error,
   }),

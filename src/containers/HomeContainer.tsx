@@ -84,6 +84,7 @@ const HomeContainer = () => {
         })
       );
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -116,6 +117,7 @@ const HomeContainer = () => {
       result = 0;
     }
     setAvgTime(result);
+    // eslint-disable-next-line
   }, [weekend]);
 
   return (

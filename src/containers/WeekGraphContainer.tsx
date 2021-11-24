@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/common/Header";
-import StatusBox from "../components/home/StatusBox";
-import SleepDescription from "../components/home/SleepDescription";
 import ModalLogout from "../components/common/ModalLogout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../modules";
-import { initializeForm, readWeek } from "../modules/sleepData";
+import { initializeForm, readLastWeek, readWeek } from "../modules/sleepData";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
@@ -25,8 +23,9 @@ const WeekGraphContainer = () => {
   let user: userType | null;
 
   ({ user } = useSelector(({ user }: RootState) => ({ user: user.user })));
-  const { weekend } = useSelector(({ sleepData }: RootState) => ({
+  const { weekend, lastWeekend } = useSelector(({ sleepData }: RootState) => ({
     weekend: sleepData.weekend,
+    lastWeekend: sleepData.lastWeekend,
   }));
 
   const sleepDate =
@@ -38,8 +37,17 @@ const WeekGraphContainer = () => {
           current.getMonth() + 1
         }-${current.getDate()}`;
 
-  const [avgTime, setAvgTime] = useState(0);
+  const lastSleepDate =
+    current.getHours() < 18
+      ? `${current.getFullYear()}-${current.getMonth() + 1}-${
+          current.getDate() - 8
+        }`
+      : `${current.getFullYear()}-${current.getMonth() + 1}-${
+          current.getDate() - 7
+        }`;
+
   const [arrayData, setArrayData] = useState([] as string[]);
+  const [prevArrayData, setPrevArrayData] = useState([] as string[]);
 
   const WeekTemplate = styled.div`
     font-family: "Pretendard", sans-serif;
@@ -68,14 +76,6 @@ const WeekGraphContainer = () => {
   const Title = styled.div`
     font-family: "Pretendard-Black", sans-serif;
     font-size: 3rem;
-    color: #262626;
-  `;
-
-  const SubTitle = styled.div`
-    font-family: "Pretendard-Bold", sans-serif;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    font-size: 2rem;
     color: #262626;
   `;
 
@@ -112,14 +112,14 @@ const WeekGraphContainer = () => {
     datasets: [
       {
         label: "저번 주 수면시간 그래프",
-        data: arrayData,
+        data: prevArrayData,
         borderColor: "#ff167d",
         backgroundColor: "rgba(255,22,125,0.3)",
         tension: 0.1,
       },
       {
         label: "이번 주 수면시간 그래프",
-        data: [1, 5, 8, 3, 0, 2],
+        data: arrayData,
         borderColor: "#2f00ff",
         backgroundColor: "rgba(47,0,255,0.3)",
         tension: 0.1,
@@ -139,17 +139,24 @@ const WeekGraphContainer = () => {
   useEffect(() => {
     if (user) {
       dispatch(initializeForm("weekend"));
+      dispatch(initializeForm("lastWeekend"));
       dispatch(
         readWeek({
           username: user.username,
           sleepDate,
         })
       );
+      dispatch(
+        readLastWeek({
+          username: user.username,
+          sleepDate: lastSleepDate,
+        })
+      );
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    let result;
     let time = 0;
     if (weekend) {
       if (weekend.avgData.length !== 0) {
@@ -157,7 +164,6 @@ const WeekGraphContainer = () => {
           time += weekend.avgData[i];
         }
         if (time !== 0) {
-          result = time / weekend.avgData.length;
           setArrayData([
             ...arrayData,
             weekend.sunday.exists ? weekend.sunday.elapsed.hour : "0",
@@ -168,17 +174,45 @@ const WeekGraphContainer = () => {
             weekend.friday.exists ? weekend.friday.elapsed.hour : "0",
             weekend.saturday.exists ? weekend.saturday.elapsed.hour : "0",
           ]);
-        } else {
-          result = 0;
         }
       } else {
-        result = 0;
+        setArrayData([...arrayData, "0", "0", "0", "0", "0", "0", "0"]);
       }
-    } else {
-      result = 0;
     }
-    setAvgTime(result);
+    // eslint-disable-next-line
   }, [weekend]);
+
+  useEffect(() => {
+    let time = 0;
+    if (lastWeekend) {
+      if (lastWeekend.avgData.length !== 0) {
+        for (let i = 0; i < lastWeekend.avgData.length; i++) {
+          time += lastWeekend.avgData[i];
+        }
+        if (time !== 0) {
+          setPrevArrayData([
+            ...prevArrayData,
+            lastWeekend.sunday.exists ? lastWeekend.sunday.elapsed.hour : "0",
+            lastWeekend.monday.exists ? lastWeekend.monday.elapsed.hour : "0",
+            lastWeekend.tuesday.exists ? lastWeekend.tuesday.elapsed.hour : "0",
+            lastWeekend.wednesday.exists
+              ? lastWeekend.wednesday.elapsed.hour
+              : "0",
+            lastWeekend.thursday.exists
+              ? lastWeekend.thursday.elapsed.hour
+              : "0",
+            lastWeekend.friday.exists ? lastWeekend.friday.elapsed.hour : "0",
+            lastWeekend.saturday.exists
+              ? lastWeekend.saturday.elapsed.hour
+              : "0",
+          ]);
+        }
+      } else {
+        setPrevArrayData([...prevArrayData, "0", "0", "0", "0", "0", "0", "0"]);
+      }
+    }
+    // eslint-disable-next-line
+  }, [lastWeekend]);
 
   return (
     <WeekTemplate>
@@ -192,8 +226,8 @@ const WeekGraphContainer = () => {
               position: "relative",
               marginTop: "70px",
               marginBottom: "80px",
-              paddingLeft: "9rem",
-              paddingRight: "9rem",
+              paddingLeft: "11rem",
+              paddingRight: "11rem",
               zIndex: 10000,
             }}
           />
