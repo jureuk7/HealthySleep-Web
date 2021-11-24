@@ -11,6 +11,8 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
     borderColor,
     backgroundColor;
 
+  let avgHour = Math.ceil(avgTime / 60);
+
   if (avgTime === 0 || !avgTime || !user) {
     startGradient = `rgb(214, 214, 214) 0%`;
     endGradient = `rgb(105, 105, 105) 100%`;
@@ -18,7 +20,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
     statusColor = `#FFFFFF`;
     statusTitle = `입력된 데이터가 부족합니다`;
   } else {
-    if (avgTime / 60 <= 3) {
+    if (avgHour <= 3) {
       startGradient = `#ffcdda 0%`;
       endGradient = `#ffc1d0 100%`;
       textColor = `#202020`;
@@ -27,7 +29,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
       borderColor = "#ff5487";
       backgroundColor = "rgba(255,135,84,0.3)";
     }
-    if (avgTime / 60 > 3 && avgTime / 60 <= 5) {
+    if (avgHour > 3 && avgHour <= 5) {
       startGradient = `#eee3bd 0%`;
       endGradient = `#eec1bd 100%`;
       textColor = `#202020`;
@@ -36,7 +38,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
       borderColor = "#ffa654";
       backgroundColor = "rgba(255,166,84,0.3)";
     }
-    if (avgTime / 60 > 5 && avgTime / 60 <= 6) {
+    if (avgHour > 5 && avgHour <= 6) {
       startGradient = `rgb(255, 251, 212) 0%`;
       endGradient = `rgb(158, 248, 155) 100%`;
       textColor = `#202020`;
@@ -45,7 +47,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
       borderColor = "#139e43";
       backgroundColor = "rgba(19, 158, 67,0.3)";
     }
-    if (avgTime / 60 > 6 && avgTime <= 7) {
+    if (avgHour > 6 && avgHour <= 7) {
       startGradient = `#defdff 0%`;
       endGradient = `#c5f8fc 100%`;
       textColor = `#202020`;
@@ -54,9 +56,9 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
       borderColor = "#00b2ff";
       backgroundColor = "rgba(0, 178, 255,0.3)";
     }
-    if (avgTime / 60 > 7) {
-      startGradient = `#e2f0d9 0%`;
-      endGradient = `#bdd7ee 100%`;
+    if (avgHour > 7) {
+      startGradient = `#e8efff 0%`;
+      endGradient = `#d6e2ff 100%`;
       textColor = `#202020`;
       statusColor = `#2564ab`;
       statusTitle = `매우 좋음`;
@@ -137,22 +139,22 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
         </Status>
         {user && (
           <AvgTime>
-            평균 수면 시간 :{" "}
-            <span className="time">
-              {Math.floor(avgTime / 60) + 1}시간 미만
-            </span>
+            평균 수면 시간 : <b>{Math.floor(avgTime / 60) + 1}시간 미만</b>
           </AvgTime>
         )}
       </StatusBox>
-      {user && (
-        <div>
-          <Line
-            data={graphData}
-            options={options}
-            style={{ position: "relative", height: "250px" }}
-          />
-        </div>
-      )}
+      {user &&
+        (avgTime === 0 ? (
+          <div>-</div>
+        ) : (
+          <div>
+            <Line
+              data={graphData}
+              options={options}
+              style={{ position: "relative", height: "250px" }}
+            />
+          </div>
+        ))}
     </StatusTemplate>
   );
 };

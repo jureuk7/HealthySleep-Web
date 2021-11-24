@@ -12,6 +12,8 @@ const RecordInner = ({
   navigate,
   error,
 }: any) => {
+  const current = new Date();
+
   return (
     <>
       {user ? (
@@ -19,7 +21,11 @@ const RecordInner = ({
           <h1>
             <span>{user["username"]}님의</span>
             <br />
-            <span>오늘 수면시간을 기록해주세요</span>
+            <span>
+              {current.getHours() < 18
+                ? `오늘 기상시간을 기록해주세요`
+                : `오늘 수면시간을 기록해주세요`}
+            </span>
           </h1>
           <form onSubmit={onSubmit}>
             <div className="form-inner">

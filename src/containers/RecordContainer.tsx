@@ -21,6 +21,7 @@ const RecordContainer = () => {
   const [modalView, setModalView] = useState(false);
   const dispatch = useDispatch();
   const current = new Date();
+  const navigate = useNavigate();
   // @ts-ignore
   const { startSleep, finishSleep, isExists, sleepDataError } = useSelector(
     ({ sleepData }: RootState) => ({
@@ -153,8 +154,6 @@ const RecordContainer = () => {
       })
     );
   };
-
-  const navigate = useNavigate();
 
   return (
     <div>

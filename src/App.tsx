@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Record from "./pages/Record";
 import Register from "./pages/Register";
+import WeekGraph from "./pages/WeekGraph";
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/record" element={<Record />} />
         <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/weekGraph" element={<WeekGraph />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
