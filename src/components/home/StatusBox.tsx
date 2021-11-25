@@ -74,7 +74,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
         label: "이 날의 수면시간",
         fill: true,
         data: data,
-        tension: 0.2,
+        tension: 0.1,
         borderColor: borderColor,
         backgroundColor: backgroundColor,
       },
