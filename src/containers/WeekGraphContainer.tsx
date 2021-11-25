@@ -128,10 +128,38 @@ const WeekGraphContainer = () => {
   } as unknown as any;
 
   const options = {
+    interaction: {
+      mode: "index",
+      intersect: false,
+    },
     responsive: true,
     plugins: {
+      tooltip: {
+        enabled: true,
+        position: "average",
+        titleFont: {
+          size: 40,
+        },
+        bodyFont: {
+          size: 20,
+        },
+      },
       legend: {
         position: "top",
+        labels: {
+          font: {
+            size: 20,
+          },
+        },
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              reverse: false,
+            },
+          },
+        ],
       },
     },
   } as unknown as any;
@@ -226,8 +254,8 @@ const WeekGraphContainer = () => {
               position: "relative",
               marginTop: "70px",
               marginBottom: "80px",
-              paddingLeft: "11rem",
-              paddingRight: "11rem",
+              paddingLeft: "14rem",
+              paddingRight: "14rem",
               zIndex: 10000,
             }}
           />
