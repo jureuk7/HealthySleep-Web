@@ -95,7 +95,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
     font-family: "SB 어그로체", sans-serif;
   `;
 
-  const StatusBox = styled.div`
+  const StatusBoxContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
   `;
@@ -105,7 +105,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
     font-weight: lighter;
   `;
 
-  const Status = styled.div`
+  const StatusTitle = styled.div`
     font-size: 80px;
     font-weight: bolder;
     color: ${statusColor};
@@ -113,20 +113,20 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
     margin-bottom: 20px;
   `;
 
-  const AvgTime = styled.div`
+  const AvgTimeSpan = styled.div`
     font-size: 20px;
   `;
 
   return (
     <StatusTemplate>
-      <StatusBox>
+      <StatusBoxContainer>
         {user && (
           <Title>
             <b>{user.username}</b>
             (님)의 수면패턴 정보
           </Title>
         )}
-        <Status>
+        <StatusTitle>
           {user ? (
             statusTitle
           ) : (
@@ -136,13 +136,13 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
               서비스입니다
             </span>
           )}
-        </Status>
+        </StatusTitle>
         {user && (
-          <AvgTime>
+          <AvgTimeSpan>
             평균 수면 시간 : <b>{Math.floor(avgTime / 60) + 1}시간 미만</b>
-          </AvgTime>
+          </AvgTimeSpan>
         )}
-      </StatusBox>
+      </StatusBoxContainer>
       {user &&
         (avgTime === 0 ? (
           <div>-</div>

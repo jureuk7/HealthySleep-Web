@@ -68,8 +68,6 @@ const HomeContainer = () => {
         ticks: {
           color: "#202020",
         },
-        min: 0,
-        max: Math.floor(avgTime / 60) + 5,
       },
     },
   };
