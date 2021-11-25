@@ -48,7 +48,7 @@ const StatusBox = ({ avgTime, options, data, user }: any) => {
       backgroundColor = "rgba(19, 158, 67,0.3)";
     }
     if (avgHour > 6 && avgHour <= 7) {
-      startGradient = `#defdff 0%`;
+      startGradient = `#e4fbff 0%`;
       endGradient = `#c5f8fc 100%`;
       textColor = `#202020`;
       statusColor = `#00b2ff`;

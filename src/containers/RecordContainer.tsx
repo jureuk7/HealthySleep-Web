@@ -62,6 +62,8 @@ const RecordContainer = () => {
         finishSleep: finishSleep,
       })
     );
+    navigate("/");
+    alert("성공적으로 저장되었습니다.");
   };
 
   const setNowStartSleep = (e: any) => {
