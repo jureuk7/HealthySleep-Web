@@ -37,17 +37,19 @@ const RecordContainer = () => {
     user: user.user,
   })));
 
+  const formatDate = (day: string) =>
+    day.length === 1 ? "0".concat(day) : day;
+
   const sleepDate =
     current.getHours() < 18
-      ? `${current.getFullYear()}-${current.getMonth() + 1}-${
-          current.getDate() - 1
-        }`
-      : `${current.getFullYear()}-${
-          current.getMonth() + 1
-        }-${current.getDate()}`;
+      ? `${current.getFullYear()}-${current.getMonth() + 1}-${formatDate(
+          String(current.getDate() - 1)
+        )}`
+      : `${current.getFullYear()}-${current.getMonth() + 1}-${formatDate(
+          String(current.getDate() - 1)
+        )}`;
 
   const onSubmit = (e: any) => {
-    e.preventDefault();
     dispatch(
       setStartSleep({
         username: user?.username,
@@ -66,15 +68,15 @@ const RecordContainer = () => {
     alert("성공적으로 저장되었습니다.");
   };
 
-  const setNowStartSleep = (e: any) => {
+  const setNowStartSleep = () => {
     dispatch(
       setField({
         form: "startSleep",
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate(),
-        hour: current.getHours(),
-        min: current.getMinutes(),
+        year: String(current.getFullYear()),
+        month: String(current.getMonth() + 1),
+        day: formatDate(String(current.getDate())),
+        hour: String(current.getHours()),
+        min: String(current.getMinutes()),
       })
     );
   };
@@ -137,11 +139,11 @@ const RecordContainer = () => {
     dispatch(
       setField({
         form: "finishSleep",
-        year: current.getFullYear(),
-        month: current.getMonth() + 1,
-        day: current.getDate(),
-        hour: current.getHours(),
-        min: current.getMinutes(),
+        year: String(current.getFullYear()),
+        month: String(current.getMonth() + 1),
+        day: formatDate(String(current.getDate())),
+        hour: String(current.getHours()),
+        min: String(current.getMinutes()),
       })
     );
   };

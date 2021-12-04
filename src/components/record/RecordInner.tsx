@@ -75,7 +75,10 @@ const RecordInner = ({
                   onInput={onStartSleepChange}
                   name="min"
                 />
-                분<button onClick={setNowStartSleep}>현재 시간 입력하기</button>
+                분
+                <button type="button" onClick={setNowStartSleep}>
+                  현재 시간 입력하기
+                </button>
               </div>
               <span>일어난 시간</span>
               <div className="time-immer">
@@ -124,11 +127,13 @@ const RecordInner = ({
                   name="min"
                 />
                 분
-                <button onClick={setNowFinishSleep}>현재 시간 입력하기</button>
+                <button type="button" onClick={setNowFinishSleep}>
+                  현재 시간 입력하기
+                </button>
               </div>
               <div className="error">{error}</div>
               <button type="submit" className="save">
-                기록 저장하기
+                저장하기
               </button>
             </div>
           </form>
