@@ -73,7 +73,7 @@ const RecordContainer = () => {
       setField({
         form: "startSleep",
         year: String(current.getFullYear()),
-        month: String(current.getMonth() + 1),
+        month: formatDate(String(current.getMonth() + 1)),
         day: formatDate(String(current.getDate())),
         hour: String(current.getHours()),
         min: String(current.getMinutes()),
@@ -140,13 +140,13 @@ const RecordContainer = () => {
       setField({
         form: "finishSleep",
         year: String(current.getFullYear()),
-        month: String(current.getMonth() + 1),
+        month: formatDate(String(current.getMonth() + 1)),
         day: formatDate(String(current.getDate())),
         hour: String(current.getHours()),
         min: String(current.getMinutes()),
       })
     );
-  };
+  }; // 이놈이 원래  저 버튼을 누르면 위에 함수가 호출되야하잖아요. 근데 onSubmit이 호출되요
 
   const onFinishSleepChange = (e: any) => {
     const { value, name } = e.target;
